@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const {
     register,login,saveclick,deletesaveclick,editsaveclick,fetchsaveclick
-} = require("../controller/userController");
+} = require("../Controller/userController");
 
 router.post("/register", register);
 router.post("/login", login);
