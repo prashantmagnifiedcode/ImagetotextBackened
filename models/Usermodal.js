@@ -24,15 +24,11 @@ const UserSchema = new Schema(
       clickname:{
         type:String,
       },
-      clickurl:{
-        type:String,
-      },
+    
       clickline:{
         type:Number,
-      },
-      clickdata:{
-        type:String,
       }
+     
     }]
   },
   { timestamps: true }

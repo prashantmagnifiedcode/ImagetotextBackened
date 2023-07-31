@@ -99,14 +99,14 @@ module.exports = {
   },
   saveclick: async (req, res, next) => {
     try {
-      const { _id, clickname, clickurl, clickdata, clickline } = req.body;
-      console.log("saveclick", _id, clickname, clickurl, clickdata, clickline);
+      const { _id, clickname, clickline } = req.body;
+      // console.log("saveclick", _id, clickname, clickurl, clickdata, clickline);
       const saveclick = await User.updateOne(
         { _id },
         {
           $push: {
             RecordClick: {
-              $each: [{ clickname, clickurl, clickline, clickdata }],
+              $each: [{ clickname, clickline}],
             },
           },
         }
@@ -133,7 +133,7 @@ module.exports = {
   },
   editsaveclick: async (req, res, next) => {
     try {
-      const { id, clickname, clickurl, clickdata, clickline } = req.body;
+      const { id, clickname, clickline } = req.body;
 
       const saveclick = await User.updateOne(
         { _id:id, "RecordClick._id": req.params.click_id },
