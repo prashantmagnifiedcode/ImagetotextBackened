@@ -31,7 +31,7 @@ module.exports = {
         email: req.body.email,
         password: hashedPassword,
       });
-      console.log(newUser);
+      // console.log(newUser);
       //Save User
       const user = await newUser.save();
       res
@@ -49,7 +49,7 @@ module.exports = {
   },
   login: async (req, res, next) => {
     try {
-      console.log("login", req.body);
+      // console.log("login", req.body);
       const { error } = loginValidation(req.body);
       if (error)
         return res
@@ -111,22 +111,23 @@ module.exports = {
           },
         }
       );
-      console.log("save id",saveclick)
       if (!saveclick) {
         res
-          .status(400)
-          .json({
-            status: 400,
-            message: "Click not Save Successfully",
-            id: saveclick._id,
-          });
+        .status(400)
+        .json({
+          status: 400,
+          message: "Click not Save Successfully",
+          id: saveclick._id,
+        });
       }
+      const Newsaveclick = await User.find({ _id });
+      // console.log("save id",Newsaveclick)
       res
         .status(200)
         .json({
           status: 200,
           message: "click  Save Successfully",
-          id: saveclick._id,
+          data:Newsaveclick[0].RecordClick
         });
     } catch (err) {
       res.status(500).json({ status: 500, message: "Internal Server Error" });
