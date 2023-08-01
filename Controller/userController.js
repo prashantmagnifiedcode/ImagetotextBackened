@@ -121,14 +121,27 @@ module.exports = {
         });
       }
       const Newsaveclick = await User.find({ _id });
-      // console.log("save id",Newsaveclick)
-      res
-        .status(200)
+       if (!Newsaveclick) {
+        res
+        .status(400)
         .json({
-          status: 200,
-          message: "click  Save Successfully",
-          data:Newsaveclick[0].RecordClick
+          status: 400,
+          message: "network error",
+          id: saveclick._id,
         });
+      }
+      const data=Newsaveclick[0].RecordClick
+      // console.log("save id",Newsaveclick)
+      if(data){
+
+        res
+          .status(200)
+          .json({
+            status: 200,
+            message: "click  Save Successfully",
+            data:Newsaveclick[0].RecordClick
+          });
+      }
     } catch (err) {
       res.status(500).json({ status: 500, message: "Internal Server Error" });
     }
